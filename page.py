@@ -1,24 +1,6 @@
 import time
-
-from selenium.webdriver.chrome import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-
-
-def setup():
-    print('set up')
-    driver = webdriver.WebDriver(executable_path='./chromedriver')
-
-    driver.get('https://habr.com')
-
-    time.sleep(1)
-
-    return driver
-
-
-def tear_down(driver):
-    print('tear down')
-    driver.quit()
 
 
 def count_pages_number(driver):
