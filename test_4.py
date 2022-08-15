@@ -2,14 +2,12 @@ from page import *
 
 
 def test_pagination_to_last_page(driver):
-    click_search_form(driver)
+    page = MainPage(driver)
+    page.open()
 
-    type_text(driver, 'NFT')
+    page = page.click_search()
 
-    click_search_button(driver)
+    page.search('NFT')
 
-    go_to_last_page(driver)
-
-    import time
-    time.sleep(1)
+    page.go_to_last_page()
 
