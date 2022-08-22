@@ -2,17 +2,28 @@ import pytest
 
 from selenium.webdriver.chrome import webdriver
 
+from selenium.webdriver.chrome.service import Service
+
+from selenium.webdriver.chrome.options import Options
+
 
 def setup():
-    print('set up')
+    lang = 'ru'
 
-    driver = webdriver.WebDriver(executable_path='./chromedriver')
+    options = Options()
+    options.add_argument(f'--lang={lang}')
+    options.add_experimental_option('prefs', {'intl.accept_languages': f'{lang}'})
+
+    service = Service(
+        executable_path='./chromedriver'
+    )
+
+    driver = webdriver.WebDriver(service=service, options=options)
 
     return driver
 
 
 def tear_down(driver):
-    print('tear down')
     driver.quit()
 
 
