@@ -5,5 +5,5 @@ def test_main_page(driver):
     page = MainPage(driver)
     page.open()
 
-    print(page.count_articles_number())
-    print(page.count_pages_number())
+    assert page.count_articles_number() == 19
+    assert page.count_pages_number() == 50

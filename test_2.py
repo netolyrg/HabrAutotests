@@ -9,6 +9,6 @@ def test_empty_search(driver):
 
     page.search('asdfasdfasdfasdf')
 
-    page.count_articles_number()
+    assert page.count_articles_number() == 0
 
-    page.get_empty_page_text()
+    assert len(page.get_empty_page_text()) > 0
