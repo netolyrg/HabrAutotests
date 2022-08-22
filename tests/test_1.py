@@ -1,4 +1,4 @@
-from page import *
+from page_objects.page import *
 
 
 def test_basic_search(driver):

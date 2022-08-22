@@ -1,6 +1,5 @@
 import time
-from locators import *
-from selenium.common.exceptions import NoSuchElementException
+from locators.locators import *
 
 
 class HabrBase:
