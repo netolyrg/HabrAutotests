@@ -44,15 +44,23 @@ class MainPage(HabrBase):
         return self.webdriver.find_element(*search_button_locator)
 
     def click_search(self):
-        # todo change sleep to wait
-        time.sleep(1)
-
         self.search_button.click()
 
-        # todo change sleep to wait
-        time.sleep(1)
+        page = SearchPage(self.webdriver)
+        page.wait_full_page()
 
-        return SearchPage(self.webdriver)
+        return page
+
+    def wait_full_page(self):
+        wait = WebDriverWait(self.webdriver, 5)
+
+        wait.until(
+            presence_of_all_elements_located(article_locator)
+        )
+
+    def open(self):
+        super().open()
+        self.wait_full_page()
 
 
 class SearchPage(HabrBase):
@@ -87,3 +95,17 @@ class SearchPage(HabrBase):
 
     def get_empty_page_text(self):
         return self.empty_result_banner.text
+
+    def wait_full_page(self):
+        wait = WebDriverWait(self.webdriver, 5)
+
+        wait.until(
+            visibility_of_element_located(search_input_locator)
+        )
+
+    def open(self):
+        super().open()
+        self.wait_full_page()
+
+    def is_page_shown(self):
+        return self.search_input.is_displayed()
