@@ -9,4 +9,12 @@ def page(driver):
 
     page.open()
 
-    return page
+    yield page
+
+    tabs = page.webdriver.window_handles
+    if len(tabs) > 1:
+        for tab in tabs[:0:-1]:
+            driver.switch_to.window(tab)
+            driver.close()
+
+    driver.switch_to.window(tabs[0])

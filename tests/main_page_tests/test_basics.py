@@ -17,12 +17,6 @@ def test_click_external_service(page):
 
     page.click_external_service(page.CAREER)
 
-    driver = page.webdriver
-    tabs = driver.window_handles
-    current_tab = driver.current_window_handle
-    new_index = tabs.index(current_tab) + 1
-    driver.switch_to.window(tabs[new_index])
-
     actual = page.current_url
     expected = 'https://career.habr.com/'
 

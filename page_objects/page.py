@@ -35,6 +35,17 @@ class HabrBase:
     def open(self):
         self.webdriver.get(self.url)
 
+    def focus_on_new_tab(self):
+        driver = self.webdriver
+
+        tabs = driver.window_handles
+
+        current_tab = driver.current_window_handle
+
+        new_index = tabs.index(current_tab) + 1
+
+        driver.switch_to.window(tabs[new_index])
+
 
 class MainPage(HabrBase):
     url = 'https://habr.com'
