@@ -1,15 +1,15 @@
-import time
-from locators.locators import *
-
-from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.expected_conditions import *
+from selenium.webdriver.support.wait import WebDriverWait
+
+from locators.locators import *
 
 
 class HabrBase:
     url = 'https://habr.com'
 
-    def __init__(self, webdriver):
-        self.webdriver = webdriver
+    def __init__(self, webdriver: WebDriver):
+        self.webdriver: WebDriver = webdriver
 
     @property
     def last_page_number(self):
@@ -39,9 +39,19 @@ class HabrBase:
 class MainPage(HabrBase):
     url = 'https://habr.com'
 
+    # services list
+    HABR = 0
+    QNA = 1
+    CAREER = 2
+    FL = 3
+
     @property
     def search_button(self):
         return self.webdriver.find_element(*search_button_locator)
+
+    @property
+    def services(self):
+        return self.webdriver.find_elements(*services_dropdown_element)
 
     def click_search(self):
         self.search_button.click()
@@ -61,6 +71,20 @@ class MainPage(HabrBase):
     def open(self):
         super().open()
         self.wait_full_page()
+
+    def click_services_dropdown(self):
+        element = self.webdriver.find_element(*services_dropdown_button)
+        element.click()
+
+    def click_external_service(self, service_index):
+        assert service_index in (self.HABR, self.QNA, self.CAREER, self.FL)
+
+        element = self.services[service_index]
+        element.click()
+
+        self.focus_on_new_tab()
+
+        return CareerPage(self.webdriver)
 
 
 class SearchPage(HabrBase):
@@ -109,3 +133,7 @@ class SearchPage(HabrBase):
 
     def is_page_shown(self):
         return self.search_input.is_displayed()
+
+
+class CareerPage(HabrBase):
+    url = 'https://career.habr.com/'
