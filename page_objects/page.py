@@ -90,12 +90,21 @@ class MainPage(HabrBase):
     def click_external_service(self, service_index):
         assert service_index in (self.HABR, self.QNA, self.CAREER, self.FL)
 
+        service_pages_map = {
+            self.HABR: MainPage,
+            self.QNA: QNAPage,
+            self.CAREER: CareerPage,
+            self.FL: FLPage,
+        }
+
         element = self.services[service_index]
         element.click()
 
         self.focus_on_new_tab()
 
-        return CareerPage(self.webdriver)
+        page_class = service_pages_map.get(service_index)
+
+        return page_class(self.webdriver)
 
 
 class SearchPage(HabrBase):
@@ -148,3 +157,11 @@ class SearchPage(HabrBase):
 
 class CareerPage(HabrBase):
     url = 'https://career.habr.com/'
+
+
+class QNAPage(HabrBase):
+    url = 'https://qna.habr.com/'
+
+
+class FLPage(HabrBase):
+    url = 'https://freelance.habr.com/'

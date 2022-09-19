@@ -15,10 +15,10 @@ def test_search_page_from_main(page):
 def test_click_external_service(page):
     page.click_services_dropdown()
 
-    page.click_external_service(page.CAREER)
+    page = page.click_external_service(page.QNA)
 
     actual = page.current_url
-    expected = 'https://career.habr.com/'
+    expected = page.url
 
     assert actual == expected
 
