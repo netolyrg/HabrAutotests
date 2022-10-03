@@ -1,6 +1,6 @@
 import pytest
 
-from page_objects.page import SearchPage
+from page_objects.search_page import SearchPage
 
 
 @pytest.fixture(scope='function')

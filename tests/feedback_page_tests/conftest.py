@@ -1,4 +1,10 @@
+import pytest
 
 
-def feedback_page():
-    pass
+@pytest.fixture(scope='function')
+def feedback_page(driver):
+    page = FeedbackPage(driver)
+
+    page.open()
+
+    return page

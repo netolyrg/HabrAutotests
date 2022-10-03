@@ -1,6 +1,6 @@
 import pytest
 
-from page_objects.page import MainPage
+from page_objects.main_page import MainPage
 
 
 @pytest.fixture(scope='function')
