@@ -46,9 +46,5 @@ class SearchPage(HabrBase):
             visibility_of_element_located(search_input_locator)
         )
 
-    def open(self):
-        super().open()
-        self.wait_full_page()
-
     def is_page_shown(self):
         return self.search_input.is_displayed()

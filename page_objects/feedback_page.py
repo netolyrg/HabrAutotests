@@ -1,4 +1,6 @@
+from selenium.webdriver.support.expected_conditions import presence_of_all_elements_located
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.wait import WebDriverWait
 
 from locators.locators import *
 from page_objects.base_page import HabrBase
@@ -34,3 +36,10 @@ class FeedbackPage(HabrBase):
 
     def change_subject_by_index(self, index=1):
         self.subject.select_by_index(index)
+
+    def wait_full_page(self):
+        wait = WebDriverWait(self.webdriver, 5)
+
+        wait.until(
+            presence_of_all_elements_located(subject)
+        )

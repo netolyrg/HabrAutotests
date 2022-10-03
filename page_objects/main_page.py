@@ -39,10 +39,6 @@ class MainPage(HabrBase):
             presence_of_all_elements_located(article_locator)
         )
 
-    def open(self):
-        super().open()
-        self.wait_full_page()
-
     def click_services_dropdown(self):
         element = self.webdriver.find_element(*services_dropdown_button)
         element.click()

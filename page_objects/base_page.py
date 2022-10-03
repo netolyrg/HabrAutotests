@@ -32,6 +32,7 @@ class HabrBase:
 
     def open(self):
         self.webdriver.get(self.url)
+        self.wait_full_page()
 
     def focus_on_new_tab(self):
         driver = self.webdriver
@@ -43,3 +44,9 @@ class HabrBase:
         new_index = tabs.index(current_tab) + 1
 
         driver.switch_to.window(tabs[new_index])
+
+    def wait_full_page(self):
+        """
+        Template for wait full page
+        """
+        pass

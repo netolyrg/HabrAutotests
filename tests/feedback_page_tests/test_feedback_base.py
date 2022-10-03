@@ -27,5 +27,5 @@ def test_change_subject(feedback_page: FeedbackPage):
 
     current = feedback_page.subject.first_selected_option.text
 
-    assert previous == current, f'Subject did not change. Prev: {previous}, current: {current}'
+    assert previous != current, f'Subject did not change. Prev: {previous}, current: {current}'
 
