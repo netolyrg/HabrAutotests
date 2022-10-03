@@ -25,9 +25,22 @@ def tear_down(driver):
 
 
 @pytest.fixture(scope='session')
-def driver():
+def session_driver():
     obj = setup()
 
     yield obj
 
     tear_down(obj)
+
+
+@pytest.fixture(scope='function')
+def driver(session_driver):
+    yield session_driver
+
+    tabs = session_driver.window_handles
+    if len(tabs) > 1:
+        for tab in tabs[:0:-1]:
+            session_driver.switch_to.window(tab)
+            session_driver.close()
+
+    session_driver.switch_to.window(tabs[0])
